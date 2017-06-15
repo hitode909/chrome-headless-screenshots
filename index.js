@@ -4,6 +4,7 @@ const file = require('mz/fs');
 const timeout = require('delay');
 
 // CLI Args
+const host = argv.host;
 const url = argv.url || 'https://www.google.com';
 const format = argv.format === 'jpeg' ? 'jpeg' : 'png';
 const viewportWidth = argv.viewportWidth || 1440;
@@ -18,7 +19,7 @@ init();
 async function init() {
   try {
     // Start the Chrome Debugging Protocol
-    const client = await CDP();
+    const client = await CDP({host: host});
     // Extract used DevTools domains.
     const {DOM, Emulation, Network, Page, Runtime} = client;
 
